@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { launchImageLibrary } from "react-native-image-picker";
+import * as ImageLibrary from "react-native-image-picker";
 import uuid from "react-native-uuid";
 import { useBoardStore } from "../store/board";
 
@@ -145,7 +145,7 @@ const FreeBoardUpdate = ({ navigation, route }) => {
           <Pressable
             style={styles.button}
             onPress={() =>
-              launchImageLibrary({}, (res) => {
+              ImageLibrary.launchImageLibrary({}, (res) => {
                 if (res?.didCancel) return;
                 setFiles([...files, res.assets[0].uri]);
               })
