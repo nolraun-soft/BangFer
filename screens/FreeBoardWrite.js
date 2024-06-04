@@ -10,9 +10,11 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { launchImageLibrary } from "react-native-image-picker";
+import * as ImageLibrary from "react-native-image-picker";
 import uuid from "react-native-uuid";
 import { useBoardStore } from "../store/board";
+
+// import * as ImagePicker from "expo-image-picker";
 
 const FreeBoardWrite = ({ navigation }) => {
   const contentInputRef = React.useRef();
@@ -128,12 +130,12 @@ const FreeBoardWrite = ({ navigation }) => {
         <View style={styles.buttonBox}>
           <Pressable
             style={styles.button}
-            onPress={() =>
-              launchImageLibrary({}, (res) => {
+            onPress={async () => {
+              ImageLibrary.launchImageLibrary({}, (res) => {
                 if (res?.didCancel) return;
                 setFiles([...files, res.assets[0].uri]);
-              })
-            }
+              });
+            }}
           >
             <AntDesign name="picture" size={24} color="#666" />
             <Text style={{ color: "#666" }}>사진</Text>
